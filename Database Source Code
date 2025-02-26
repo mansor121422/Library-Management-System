@@ -1,0 +1,37 @@
+ CREATE TABLE Users (
+    User_ID INT PRIMARY KEY,
+    Username VARCHAR(50),
+    Password VARCHAR(255),
+    Role VARCHAR(50),
+    Email VARCHAR(100)
+);
+ 
+CREATE TABLE Books (
+    Book_ID INT PRIMARY KEY,
+    Title VARCHAR(255),
+    Author VARCHAR(255),
+    Genre VARCHAR(100),
+    Publish_year INT,
+    Status VARCHAR(50)
+);
+ 
+CREATE TABLE Transactions (
+    Transaction_ID INT PRIMARY KEY,
+    User_ID INT,
+    Book_ID INT,
+    Borrow_Date DATE,
+    Due_Date DATE,
+    Return_Date DATE,
+    Fine_Amount DECIMAL(10, 2),
+    FOREIGN KEY (User_ID) REFERENCES Users(User_ID),
+    FOREIGN KEY (Book_ID) REFERENCES Books(Book_ID)
+);
+ 
+CREATE TABLE Fines (
+    Fine_ID INT PRIMARY KEY,
+    Transaction_ID INT,
+    Amount DECIMAL(10, 2),
+    Payment DATE,
+    Payment_Date DATE,
+    FOREIGN KEY (Transaction_ID) REFERENCES Transactions(Transaction_ID)
+);
